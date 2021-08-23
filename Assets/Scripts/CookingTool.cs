@@ -27,6 +27,10 @@ public class CookingTool : MonoBehaviour
         if (cookableProduct)
         {
             cookableProduct.prepareForCooking();
+            if (isOnStove)
+            {
+                cookableProduct.startCooking();
+            }
         }
     }
 

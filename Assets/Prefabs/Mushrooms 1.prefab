@@ -166,6 +166,7 @@ MonoBehaviour:
   sliced: {fileID: 1792990499063399334}
   notSliced: {fileID: 1029704551770322}
   cuttingBoardAnchor: {fileID: 5432757536721039938}
+  veg: 2
 --- !u!54 &5624422033301026061
 Rigidbody:
   m_ObjectHideFlags: 0

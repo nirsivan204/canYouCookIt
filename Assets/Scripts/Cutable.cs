@@ -14,13 +14,20 @@ public class Cutable : MonoBehaviour
     private AudioSource AS;
     private bool isSliced = false;
     public Transform cuttingBoardAnchor;
+    [SerializeField] Vegetables veg;
+    private PreparedIng ing;
 
     // Start is called before the first frame update
     void Start()
     {
         AS = GetComponent<AudioSource>();
-    }
+        ing = new PreparedIng();
 
+    }
+    public PreparedIng getPreparedIng()
+    {
+        return ing;
+    }
     // Update is called once per frame
     void Update()
     {
@@ -54,6 +61,8 @@ public class Cutable : MonoBehaviour
         {
             isSliced = true;
             replaceMesh();
+            ing.setDishType(Dishes.Salad);
+            ing.setVegType(veg);
         }
         canBeCut = false;
 

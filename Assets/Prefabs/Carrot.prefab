@@ -225,6 +225,7 @@ MonoBehaviour:
   sliced: {fileID: 3730578195224291292}
   notSliced: {fileID: 4179963508556237860}
   cuttingBoardAnchor: {fileID: 655091212894072417}
+  veg: 1
 --- !u!82 &4179963509939271441
 AudioSource:
   m_ObjectHideFlags: 0

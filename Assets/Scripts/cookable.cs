@@ -18,11 +18,19 @@ public class cookable : MonoBehaviour
     private bool isBurned = false;
     private float timeToBurn = 3;
     private GameObject currentMesh;
+    private PreparedIng ing;
+
 
     private void Start()
     {
         timeUntilCooked = neededCookingTime;
         currentMesh = uncooked;
+        ing = new PreparedIng();
+    }
+
+    public PreparedIng getPreparedIng()
+    {
+        return ing;
     }
     public void prepareForCooking()
     {
@@ -39,11 +47,15 @@ public class cookable : MonoBehaviour
         if (isCooking)
         {
             timeUntilCooked -= Time.deltaTime;
+            print("isCooking" + isCooking);
             if (timeUntilCooked < 0)
             {
                 canBeRemoved = true;
                 isCooked = true;
                 replaceMesh(cooked);
+                ing.setDishType(Dishes.Omlette);
+                ing.setOmletteType(OmletteIngrediants.Omlette);
+                print("is cooked");
             }
             if(timeUntilCooked < -timeToBurn)
             {
