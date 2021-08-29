@@ -22,7 +22,7 @@ public class Dish : MonoBehaviour
             print("No Mesh");
         }
     }
-    public virtual void ShowNextIngrediant(Enum prod)
+    public virtual void ShowNextIngrediant(int prod)
     {
 
     }

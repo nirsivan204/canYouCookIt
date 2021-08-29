@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PreparedIng: Component
+public class PreparedIng
 {
     private Dishes dish;
-    private Vegetables veg;
     private bool isPreparedForPlate = false;
-    private OmletteIngrediants egg;
+    private int ingNum;
     public void setDishType(Dishes dish) 
     {
         this.dish = dish;
@@ -17,16 +16,6 @@ public class PreparedIng: Component
     public Dishes getDishType()
     {
         return dish;
-    }
-
-    public void setVegType(Vegetables veg)
-    {
-        this.veg = veg;
-    }
-
-    public Vegetables getVegType()
-    {
-        return veg;
     }
 
     private void setIsPreparedForPlate()
@@ -39,13 +28,14 @@ public class PreparedIng: Component
         return isPreparedForPlate;
     }
 
-    public OmletteIngrediants getOmletteType()
+
+    public int getIngNum()
     {
-        return egg;
+        return ingNum;
     }
 
-    public void setOmletteType(OmletteIngrediants egg)
+    public void setIngNum(int ingNum)
     {
-        this.egg = egg;
+        this.ingNum = ingNum;
     }
 }

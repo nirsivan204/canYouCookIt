@@ -17,17 +17,17 @@ public class Salad : Dish
     [SerializeField] Material tomatoMat;
     [SerializeField] Material carrotMat;
     [SerializeField] Material shroomMat;
+    [SerializeField] Material onionMat;
 
-
-    public override void ShowNextIngrediant(Enum prod)
+    public override void ShowNextIngrediant(int prod)
     {
         Material mat = null;
-        Type enumType = prod.GetType();
-        if(enumType.Name != "Vegetables")
-        {
-            print("error in salad, not a vegetable");
-        }
-        else
+        //Type enumType = prod.GetType();
+        //if(enumType.Name != "Vegetables")
+       // {
+       //     print("error in salad, not a vegetable");
+       // }
+    //    else
         {
             Vegetables veg = (Vegetables)prod;
             if (!isReady)
@@ -42,6 +42,9 @@ public class Salad : Dish
                         break;
                     case Vegetables.Shroom:
                         mat = shroomMat;
+                        break;
+                    case Vegetables.Onion:
+                        mat = onionMat;
                         break;
                 }
                 ingrediants[numOfIng].material = mat;

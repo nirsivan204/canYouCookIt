@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Knife
   - Cutable
+  - Plate
+  - CuttingBoard
   layers:
   - Default
   - TransparentFX
@@ -16,11 +18,11 @@ TagManager:
   - handles
   - vrHands
   - grabables
-  - 
-  - 
-  - 
-  - 
-  - 
+  - ingrediants
+  - body
+  - target
+  - CuttingTools
+  - Plate
   - 
   - 
   - 

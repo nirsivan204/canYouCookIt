@@ -10,14 +10,14 @@ public enum OmletteIngrediants
 
 public class Omlette : Dish
 {
-    public override void ShowNextIngrediant(Enum prod)
+    public override void ShowNextIngrediant(int prod)
     {
-        Type enumType = prod.GetType();
-        if (enumType.Name != "OmletteIngrediants")
-        {
-            print("error in omlette, not an omlette");
-        }
-        else
+      //  Type enumType = prod.GetType();
+      //  if (enumType.Name != "OmletteIngrediants")
+      //  {
+      //      print("error in omlette, not an omlette");
+      //  }
+      //  else
         {
             OmletteIngrediants egg = (OmletteIngrediants)prod;
             if (!isReady)

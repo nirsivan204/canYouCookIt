@@ -54,7 +54,7 @@ public class cookable : MonoBehaviour
                 isCooked = true;
                 replaceMesh(cooked);
                 ing.setDishType(Dishes.Omlette);
-                ing.setOmletteType(OmletteIngrediants.Omlette);
+                ing.setIngNum((int)OmletteIngrediants.Omlette);
                 print("is cooked");
             }
             if(timeUntilCooked < -timeToBurn)

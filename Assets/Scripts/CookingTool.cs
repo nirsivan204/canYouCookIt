@@ -45,7 +45,7 @@ public class CookingTool : MonoBehaviour
         {
             GI.attachTransform = handlePos.transform;
         }
-        print("pan on stove "+ onStove);
+       // print("pan on stove "+ onStove);
         if (cookableProduct)
         {
             if (isOnStove)

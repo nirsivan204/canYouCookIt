@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.XR;
+using UnityEngine.XR.Interaction.Toolkit;
 
 public class HandPresence : MonoBehaviour
 {
@@ -14,7 +15,8 @@ public class HandPresence : MonoBehaviour
     private GameObject spawnedController;
     private GameObject spawnedHandModel;
     private Animator handAnimator;
-    
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,18 +63,18 @@ public class HandPresence : MonoBehaviour
         if (targetDevice.TryGetFeatureValue(CommonUsages.primaryButton, out bool primaryButtonValue) &&
             primaryButtonValue)
         {
-            //Debug.Log("Pressing Primary Button");
+         //  Debug.Log("Pressing Primary Button");
         }
         
         if (targetDevice.TryGetFeatureValue(CommonUsages.trigger, out float triggerValue) && triggerValue > 0.1f)
         {
-            //Debug.Log("Trigger Pressed " + triggerValue);
+         //   Debug.Log("Trigger Pressed " + triggerValue);
         }
         
         if (targetDevice.TryGetFeatureValue(CommonUsages.primary2DAxis, out Vector2 primary2DAxisValue)
             && primary2DAxisValue != Vector2.zero)
         {
-            //Debug.Log("Primary Touchpad: " + primary2DAxisValue);
+          //  Debug.Log("Primary Touchpad: " + primary2DAxisValue);
         }
         if(spawnedHandModel && spawnedController)
         {

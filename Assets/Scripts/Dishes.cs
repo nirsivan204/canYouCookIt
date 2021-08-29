@@ -5,5 +5,6 @@ using UnityEngine;
 public enum Dishes
 {
     Salad,
-    Omlette
+    Omlette,
+    Null
 }

@@ -13,24 +13,20 @@ public class Cutable : MonoBehaviour
     public GameObject notSliced;
     private AudioSource AS;
     private bool isSliced = false;
-    public Transform cuttingBoardAnchor;
     [SerializeField] Vegetables veg;
     private PreparedIng ing;
+    private XRSocketInteractor SI;
 
     // Start is called before the first frame update
     void Start()
     {
+        SI = GetComponent<XRSocketInteractor>();
         AS = GetComponent<AudioSource>();
         ing = new PreparedIng();
-
     }
     public PreparedIng getPreparedIng()
     {
         return ing;
-    }
-    // Update is called once per frame
-    void Update()
-    {
     }
 
 
@@ -42,6 +38,13 @@ public class Cutable : MonoBehaviour
         }
     }
 
+    public void disableCut()
+    {
+        canBeCut = false ;
+
+    }
+
+
 
 
     private void OnTriggerEnter(Collider other)
@@ -51,8 +54,23 @@ public class Cutable : MonoBehaviour
             cut();
             Invoke("enableCut", 0.5f);
         }
+        if (other.gameObject.tag == "CuttingBoard")
+        {
+            SI = other.gameObject.GetComponent<XRSocketInteractor>();
+            SI.selectExited.AddListener(changeLayer);
+        }
     }
 
+    private void changeLayer(SelectExitEventArgs arg0)
+    {
+        Invoke("changeLayerHelper", 0.1f);
+    }
+
+    private void changeLayerHelper()
+    {
+        gameObject.layer =  LayerMask.NameToLayer("ingrediants");
+
+    }
     private void cut()
     {
         cuts++;
@@ -62,7 +80,7 @@ public class Cutable : MonoBehaviour
             isSliced = true;
             replaceMesh();
             ing.setDishType(Dishes.Salad);
-            ing.setVegType(veg);
+            ing.setIngNum((int)veg);
         }
         canBeCut = false;
 

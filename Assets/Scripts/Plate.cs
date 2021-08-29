@@ -6,7 +6,7 @@ using UnityEngine.XR.Interaction.Toolkit;
 
 public class Plate : MonoBehaviour
 {
-    private XRSocketInteractor SI;
+    [SerializeField] private XRSocketInteractor SI;
     bool hasIngrediant = false;
     private Dishes dishType;
     private Dish dish;
@@ -17,60 +17,100 @@ public class Plate : MonoBehaviour
     void Start()
     {
         SI = GetComponent<XRSocketInteractor>();
+        SI.enabled = true;
         SI.selectEntered.AddListener(showFood);
     }
     private void showFood(SelectEnterEventArgs arg0)
     {
-        if (!hasIngrediant)
+        if (arg0.interactable.gameObject.layer == LayerMask.NameToLayer("ingrediants"))
         {
-            chooseDish(arg0.interactable.gameObject);
-            hasIngrediant = true;
+            PreparedIng ing = checkIngrediant(arg0.interactable.gameObject);
+            if (ing.getIsPreparedForPlate())
+            {
+                print("nit2");
+
+                if (!hasIngrediant)
+                {
+                    if (ing.getIsPreparedForPlate())
+                    {
+                        dishType = ing.getDishType();
+                        if (dishType == Dishes.Null)
+                        {
+                            print("error in Plate, not an ingrediant");
+                            return;
+                        }
+                    }
+                    else
+                    {
+                        print("error in Plate, not an ingrediant");
+                        return;
+                    }
+
+                    if (dishType == Dishes.Null)
+                    {
+                        print("error in Plate, not an ingrediant");
+                        return;
+                    }
+                    addFirstIngrediant(dishType, ing);
+
+                    hasIngrediant = true;
+                }
+                else
+                {
+                    dish.ShowNextIngrediant(ing.getIngNum());
+                }
+                Destroy(arg0.interactable.gameObject);
+            }
+            else
+            {
+                print("error in Plate, not an ingrediant");
+            }
         }
+        
 
     }
 
-    public void chooseDish(GameObject firstIng)
+    private void addFirstIngrediant(Dishes dishType, PreparedIng ing)
     {
-        PreparedIng ing;
+
+        switch (dishType)
+        {
+            case Dishes.Salad:
+                {
+                    GameObject clone = Instantiate(saladGO, transform);
+                    dish = clone.GetComponent<Salad>();
+                    dish.ShowNextIngrediant(ing.getIngNum());
+                    break;
+                }
+            case Dishes.Omlette:
+                {
+                    GameObject clone = Instantiate(omletteGO, transform);
+                    dish = clone.GetComponent<Omlette>();
+                    dish.ShowNextIngrediant(ing.getIngNum());
+                    break;
+                }
+        }
+    }
+
+    public PreparedIng checkIngrediant(GameObject firstIng)
+    {
+
         Cutable cutableScript = firstIng.GetComponent<Cutable>();
         if (cutableScript)
         {
-            ing = cutableScript.getPreparedIng();
+            PreparedIng res = cutableScript.getPreparedIng();
+            print("is cutuable + " + res);
+            return res;
         }
         else
         {
             cookable cookableScript = firstIng.GetComponent<cookable>();
-            ing = cookableScript.getPreparedIng();
-        }
-        if (ing.getIsPreparedForPlate())
-        {
-            dishType = ing.getDishType();
-            switch (dishType)
+            if (!cookableScript)
             {
-                case Dishes.Salad:
-                    {
-                        GameObject clone = Instantiate(saladGO, transform);
-                        dish = clone.GetComponent<Salad>();
-                        Vegetables veg = ing.getVegType();
-                        dish.ShowNextIngrediant(veg);
-                        break;
-                    }
-                case Dishes.Omlette:
-                    {
-                        GameObject clone = Instantiate(omletteGO, transform);
-                        dish = clone.GetComponent<Omlette>();
-                        OmletteIngrediants egg = ing.getOmletteType();
-                        dish.ShowNextIngrediant(egg);
-                        break;
-                    }
+                print("nir3");
+                return null;
             }
-            firstIng.SetActive(false);
-        }
-        else
-        {
-            print("error in Plate, not an ingrediant");
-
+            return cookableScript.getPreparedIng();
         }
     }
-
 }
