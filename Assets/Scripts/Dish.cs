@@ -6,7 +6,8 @@ using System;
 public class Dish : MonoBehaviour
 {
     [SerializeField] GameObject mesh;
-    [SerializeField] protected MeshRenderer[] ingrediants;
+    [SerializeField] protected MeshRenderer[] ingrediantsMeshsRef;
+    protected int[] ingrediants;
     [SerializeField] protected int maxNumIngrediants;
     protected bool isReady = false;
     protected int numOfIng = 0;
@@ -21,6 +22,7 @@ public class Dish : MonoBehaviour
         {
             print("No Mesh");
         }
+        ingrediants = new int[maxNumIngrediants];
     }
     public virtual void ShowNextIngrediant(int prod)
     {
@@ -36,4 +38,17 @@ public class Dish : MonoBehaviour
         return isReady;
     }
 
+    public virtual int ScoreDish(Dish TargetDish)
+    {
+        if(GetType() != TargetDish.GetType())
+        {
+            return -10;
+        }
+        return 0;
+    }
+
+    public int[] getIngrediants()
+    {
+        return ingrediants;
+    }
 }

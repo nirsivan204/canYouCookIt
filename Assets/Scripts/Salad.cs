@@ -47,8 +47,9 @@ public class Salad : Dish
                         mat = onionMat;
                         break;
                 }
-                ingrediants[numOfIng].material = mat;
-                ingrediants[numOfIng].enabled = true;
+                ingrediantsMeshsRef[numOfIng].material = mat;
+                ingrediantsMeshsRef[numOfIng].enabled = true;
+                ingrediants[numOfIng] = prod;
                 numOfIng++;
                 isDishReady();
             }
@@ -59,5 +60,48 @@ public class Salad : Dish
         }
 
 
+    }
+
+    public override int ScoreDish(Dish TargetDish)
+    {
+        int score = base.ScoreDish(TargetDish);
+        if(score >= 0)
+        {
+            score += compareIngrediants(ingrediants, TargetDish.getIngrediants());
+
+        }
+        return score;
+    }
+
+    private int compareIngrediants(int[] a, int[] b)
+    {
+        Array.Sort(a);
+        Array.Sort(b);
+        int score = 0;
+        int offset = 0;
+        for (int i = 0; i < maxNumIngrediants; i++)
+        {
+            if(a[i] == b[i + offset])
+            {
+                score++;
+            }
+            else
+            {
+                int j = 1;
+                for (; j < maxNumIngrediants-i; j++)
+                {
+                    if (a[i] <= b[i+j])
+                    {
+                        if (a[i] == b[i + j])
+                        {
+                            score++;
+                            break;
+                        }
+                    }
+                }
+                offset += j;
+            }
+        }
+        return score--;
     }
 }

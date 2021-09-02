@@ -25,7 +25,7 @@ public class Omlette : Dish
                 switch (egg)
                 {
                     case OmletteIngrediants.Omlette:
-                        ingrediants[numOfIng].enabled = true;
+                        ingrediantsMeshsRef[numOfIng].enabled = true;
                         break;
                 }
                 numOfIng++;

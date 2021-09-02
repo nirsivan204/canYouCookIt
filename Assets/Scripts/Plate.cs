@@ -8,7 +8,7 @@ public class Plate : MonoBehaviour
 {
     [SerializeField] private XRSocketInteractor SI;
     bool hasIngrediant = false;
-    private Dishes dishType;
+    private Dishes dishType = Dishes.Null;
     private Dish dish;
     public GameObject saladGO;
     public GameObject omletteGO;
@@ -27,33 +27,13 @@ public class Plate : MonoBehaviour
             PreparedIng ing = checkIngrediant(arg0.interactable.gameObject);
             if (ing.getIsPreparedForPlate())
             {
-                print("nit2");
-
                 if (!hasIngrediant)
                 {
                     if (ing.getIsPreparedForPlate())
                     {
-                        dishType = ing.getDishType();
-                        if (dishType == Dishes.Null)
-                        {
-                            print("error in Plate, not an ingrediant");
-                            return;
-                        }
+                        addFirstIngrediant(ing);
+                        hasIngrediant = true;
                     }
-                    else
-                    {
-                        print("error in Plate, not an ingrediant");
-                        return;
-                    }
-
-                    if (dishType == Dishes.Null)
-                    {
-                        print("error in Plate, not an ingrediant");
-                        return;
-                    }
-                    addFirstIngrediant(dishType, ing);
-
-                    hasIngrediant = true;
                 }
                 else
                 {
@@ -70,10 +50,10 @@ public class Plate : MonoBehaviour
 
     }
 
-    private void addFirstIngrediant(Dishes dishType, PreparedIng ing)
+    private void addFirstIngrediant( PreparedIng ing)
     {
-
-        switch (dishType)
+        dishType = ing.getDishType();
+        switch (dishType) 
         {
             case Dishes.Salad:
                 {
@@ -87,6 +67,11 @@ public class Plate : MonoBehaviour
                     GameObject clone = Instantiate(omletteGO, transform);
                     dish = clone.GetComponent<Omlette>();
                     dish.ShowNextIngrediant(ing.getIngNum());
+                    break;
+                }
+            case Dishes.Null:
+                {
+                    print("error in Plate, not an ingrediant");
                     break;
                 }
         }
@@ -107,10 +92,14 @@ public class Plate : MonoBehaviour
             cookable cookableScript = firstIng.GetComponent<cookable>();
             if (!cookableScript)
             {
-                print("nir3");
                 return null;
             }
             return cookableScript.getPreparedIng();
         }
+    }
+
+    public Dish getDish()
+    {
+        return dish;
     }
 }
