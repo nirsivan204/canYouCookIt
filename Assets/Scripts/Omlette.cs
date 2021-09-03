@@ -28,6 +28,12 @@ public class Omlette : Dish
                         ingrediantsMeshsRef[numOfIng].enabled = true;
                         break;
                 }
+                if (ingrediants == null)
+                {
+                    ingrediants = new int[maxNumIngrediants];
+                }
+                ingrediants[numOfIng] = prod;
+
                 numOfIng++;
                 isDishReady();
             }

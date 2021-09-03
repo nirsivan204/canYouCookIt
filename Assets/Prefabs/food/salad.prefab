@@ -127,11 +127,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mesh: {fileID: 5227644617851768118}
-  ingrediants:
+  maxNumIngrediants: 3
+  ingrediantsMeshsRef:
   - {fileID: 997424396874124991}
   - {fileID: 3175043580410717630}
   - {fileID: 2186115063774916237}
-  maxNumIngrediants: 3
   tomatoMat: {fileID: 2100000, guid: f28d72fa7a96c214b8ff02e9f779d4aa, type: 2}
   carrotMat: {fileID: 2100000, guid: b888f657a1ab6dd4eb2a0e806bc54f9f, type: 2}
   shroomMat: {fileID: 2100000, guid: 642e32a384252394fb95664fe2e9caba, type: 2}

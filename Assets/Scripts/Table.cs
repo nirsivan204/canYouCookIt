@@ -22,7 +22,7 @@ public class Table : MonoBehaviour
         if (plate)
         {
             dishOnTable = plate.getDish();
-            gradeDish()
+            //gradeDish();
         }
     }
 }

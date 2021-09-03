@@ -6,11 +6,11 @@ using System;
 public class Dish : MonoBehaviour
 {
     [SerializeField] GameObject mesh;
-    [SerializeField] protected MeshRenderer[] ingrediantsMeshsRef;
     protected int[] ingrediants;
     [SerializeField] protected int maxNumIngrediants;
     protected bool isReady = false;
     protected int numOfIng = 0;
+    [SerializeField] protected MeshRenderer[] ingrediantsMeshsRef;
 
     protected void Start()
     {

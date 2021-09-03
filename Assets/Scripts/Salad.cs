@@ -49,6 +49,10 @@ public class Salad : Dish
                 }
                 ingrediantsMeshsRef[numOfIng].material = mat;
                 ingrediantsMeshsRef[numOfIng].enabled = true;
+                if (ingrediants == null)
+                {
+                    ingrediants = new int[maxNumIngrediants];
+                }
                 ingrediants[numOfIng] = prod;
                 numOfIng++;
                 isDishReady();
